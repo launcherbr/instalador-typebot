@@ -17,7 +17,7 @@ apt update && apt upgrade -y
 
 apt install sudo dos2unix -y
 
-sudo git clone https://github.com/Whaticket-Free/Instalador-TypeBot-Whaticket-SaaS.git && cd Instalador-TypeBot-Whaticket-SaaS && sudo chmod +x ./typebot.sh
+sudo git clone https://github.com/launcherbr/instalador-typebot.git && cd instalador-typebot && sudo chmod +x ./typebot.sh
 
 dos2unix typebot.sh
 
