@@ -1,26 +1,38 @@
-##REQUESITOS
+REQUISITOS
+Sistema Operacional: Ubuntu 20.04
 
--UBUNTU 20.04
+Whaticket SaaS: Já deve estar instalado no servidor, com banco de dados PostgreSQL configurado.
 
--JA POSSUIR INSTALADO NO SEU SERVIDOR UMA VERSAO DE WHATICKET SAAS COM BANCO POSTGRES
+Subdomínios: Criar subdomínios e apontá-los para o IP do seu servidor VPS. Exemplos:
 
-CRIAR SUBDOMINIO E APONTAR PARA O IP DA SUA VPS EXEMPLO: 
 typebot.seudominio.com
+
 chat.seudominio.com
+
 storage.seudominio.com
 
-POSSUIR OS DADOS SMTP DE UMA CONTA DE EMAIL
+Dados SMTP: Possuir as credenciais de uma conta de e-mail configurada.
 
-##RODAR OS COMANDOS ABAIXO NO SEU SERVIDOR SSH
+COMANDOS PARA EXECUTAR NO SERVIDOR (via SSH)
+Atualize os pacotes do sistema:
 
+bash
 apt update && apt upgrade -y
+Instale os pacotes necessários:
 
+bash
 apt install sudo dos2unix -y
+Clone o repositório do instalador e prepare o script:
 
+bash
 sudo git clone https://github.com/launcherbr/instalador-typebot.git && cd instalador-typebot && sudo chmod +x ./typebot.sh
+Converta o script para o formato Unix (caso necessário):
 
+bash
 dos2unix typebot.sh
+Execute o script de instalação:
 
+bash
 ./typebot.sh
-
-AGORA E SO SEGUIR COM AS INSTUÇOES NA TELA DE SEU SERVIDOR
+PRÓXIMOS PASSOS
+Agora, siga as instruções exibidas na tela do terminal do seu servidor para concluir a configuração.
