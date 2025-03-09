@@ -1,3 +1,6 @@
+Estamos avaliando essa alternativa para rodar o typebot no mesmo servidor do whaticket, não utilize em produção,.
+
+
 REQUISITOS
 Sistema Operacional: Ubuntu 20.04
 
