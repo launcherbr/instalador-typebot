@@ -16,23 +16,28 @@ Dados SMTP: Possuir as credenciais de uma conta de e-mail configurada.
 COMANDOS PARA EXECUTAR NO SERVIDOR (via SSH)
 Atualize os pacotes do sistema:
 
-bash
+```bash
 apt update && apt upgrade -y
+```
 Instale os pacotes necessários:
 
-bash
+```bash
 apt install sudo dos2unix -y
+```
 Clone o repositório do instalador e prepare o script:
 
-bash
+```bash
 sudo git clone https://github.com/launcherbr/instalador-typebot.git && cd instalador-typebot && sudo chmod +x ./typebot.sh
+```
 Converta o script para o formato Unix (caso necessário):
 
-bash
+```bash
 dos2unix typebot.sh
+```
 Execute o script de instalação:
 
-bash
+```bash
 ./typebot.sh
+```
 PRÓXIMOS PASSOS
 Agora, siga as instruções exibidas na tela do terminal do seu servidor para concluir a configuração.
