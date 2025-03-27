@@ -111,7 +111,7 @@ services:
       - minio
     entrypoint: >
       /bin/sh -c "
-      sleep 10;
+      sleep 15;
       /usr/bin/mc config host add minio http://minio:$MINIO_PORT minio minio123;
       /usr/bin/mc mb minio/typebot;
       /usr/bin/mc anonymous set public minio/typebot/public;
