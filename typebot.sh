@@ -40,7 +40,7 @@ cat <<EOF > docker-compose.yml
 version: '3.3'
 services:
   typebot-db:
-    image: postgres:13
+    image: postgres:14
     restart: always
     volumes:
       - db_data:/var/lib/postgresql/data
