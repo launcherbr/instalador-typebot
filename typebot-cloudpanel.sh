@@ -5,8 +5,10 @@ read -p "Digite o domínio para o Typebot (ex: typebot.exemplo.com): " TYPEBOT_D
 read -p "Digite a porta para o Typebot (ex: 3001): " TYPEBOT_PORT
 read -p "Digite o domínio para o Chat (ex: chat.exemplo.com): " CHAT_DOMAIN
 read -p "Digite a porta para o Chat (ex: 3002): " CHAT_PORT
-read -p "Digite o domínio para o Storage (ex: storage.exemplo.com): " STORAGE_DOMAIN
-read -p "Digite a porta para o Minio (ex: 9000): " MINIO_PORT
+read -p "Digite o domínio para o S3 (ex: s3.exemplo.com): " S3_DOMAIN
+read -p "Digite a porta para o s3 (ex: 9000): " S3_PORT
+read -p "Digite o domínio para o Minio (ex: storage.exemplo.com): " STORAGE_DOMAIN
+read -p "Digite a porta para o Minio (ex: 9001): " MINIO_PORT
 read -p "Digite o email do administrador: " ADMIN_EMAIL
 read -p "Digite a senha do banco de dados PostgreSQL para o Typebot: " POSTGRES_PASSWORD
 read -p "Digite o host do servidor SMTP (ex: smtp.zoho.com): " SMTP_HOST
@@ -87,25 +89,29 @@ services:
       - S3_ACCESS_KEY=minio
       - S3_SECRET_KEY=minio123
       - S3_BUCKET=typebot
-      - S3_ENDPOINT=$STORAGE_DOMAIN
+      - S3_ENDPOINT=$S3_DOMAIN
   mail:
     image: bytemark/smtp
     restart: always
   minio:
-    labels:
-      virtual.host: '$STORAGE_DOMAIN'
-      virtual.port: '$MINIO_PORT'
-      virtual.tls-email: '$ADMIN_EMAIL'
+    container_name: minio
     image: minio/minio
-    command: server /data
+    restart: always
     ports:
-      - '$MINIO_PORT:9000'
+      - '$S3_PORT:9000'
+      - '$MINIO_PORT:9001'
+    
     environment:
       MINIO_ROOT_USER: minio
       MINIO_ROOT_PASSWORD: minio123
+      MINIO_BROWSER_REDIRECT_URL: https://$STORAGE_DOMAIN
+      MINIO_SERVER_URL: https://$S3_DOMAIN
     volumes:
-      - s3_data:/data
+      - ./minio/data:/data
+    command: server /data --console-address ":$MINIO_PORT"
+
   createbuckets:
+    container_name: createbuckets
     image: minio/mc
     depends_on:
       - minio
